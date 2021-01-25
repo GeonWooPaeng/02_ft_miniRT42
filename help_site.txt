@@ -1,2 +1,16 @@
 - 블로그 -
-https://yeosong1.github.io/miniRT%EB%9D%BC%EC%9D%B4%EB%B8%8C%EB%9F%AC%EB%A6%AC
+https://velog.io/@sayi/42cursursmlx-%ED%8A%9C%ED%86%A0%EB%A6%AC%EC%96%BC-%EC%9E%85%EB%A0%A5-%EC%9D%B4%EB%B2%A4%ED%8A%B8-hooking
+
+*** https://harm-smits.github.io/42docs/libs/minilibx/getting_started.html
+
+https://raytracing.github.io/books/RayTracingInOneWeekend.html
+
+
+- 동영상 -
+https://www.youtube.com/watch?v=G8XwW-eFlLM
+
+
+안티앨리어싱, 분산광 할때 랜덤함수때 다른거 참고
+
+- github 오류 -
+https://velog.io/@kyoung99u/Linux-%EC%99%B8%EB%B6%80-%ED%86%B5%EC%8B%A0-%EC%98%A4%EB%A5%98
