@@ -1,24 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   vector.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gpaeng <gpaeng@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/01/25 13:36:51 by gpaeng            #+#    #+#             */
-/*   Updated: 2021/01/25 19:58:39 by gpaeng           ###   ########.fr       */
+/*   Created: 2021/01/27 14:41:01 by gpaeng            #+#    #+#             */
+/*   Updated: 2021/01/27 16:18:10 by gpaeng           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <mlx.h>
+#ifndef VECTOR_H
+# define VECTOR_H
 
-int main(void)
+typedef struct	s_vec
 {
-    
-    void *mlx;
-    void *mlx_win;
+	double x;
+	double y;
+	double z;
+}				t_vec;
 
-    mlx = mlx_init();
-    mlx_win = mlx_new_window(mlx, 1920, 1080, "Hello world");
-    mlx_loop(mlx);
-}
+#endif

@@ -96,8 +96,13 @@ https://github.com/42Paris/minilibx-linux 를 clone 해줍니다.
 
 
 ```shell
+
 $ip route #에서 default값이 나의 네트워크 ip(default gateway)
+
+$export DISPLAY=$(cat /etc/resolv.conf | grep nameserver | awk '{print $2}'):0.0
+
 $echo $DISPLAY # default gateway랑 같은지 확인
+
 $export $DISPLAY=나의 네트워크 값 #default gateway랑 같지 않은 경우
 ```
 
