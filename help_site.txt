@@ -3,7 +3,7 @@
 
 *** https://harm-smits.github.io/42docs/libs/minilibx/getting_started.html
 
-
+*** https://github.com/psj3205/miniRT#4-%EA%B4%91%EC%84%A0-%EA%B5%AC%EC%A1%B0%EC%B2%B4-%EB%A7%8C%EB%93%A4%EA%B8%B0
 
 - 동영상 -
 https://www.youtube.com/watch?v=G8XwW-eFlLM
