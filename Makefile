@@ -7,16 +7,32 @@ DIR_S = ./srcs/
 DIR_O = ./
 
 SRC =	\
-		math/vec_op.c
+		vec_op.c \
+		main.c
 
 
-SRCS = $(addprefix $(SRC))
+SRCS = $(addprefix $(DIR_S),$(SRC))
 
 OBJS = $(SRCS:.c=.o)
 
 %.o: %.c
-	$(CC) $(FLAGS) -I $(DIR_H) -c $< -o $@
+	$(CC) $(FLAGS) -c $< -o $@
 
 all: $(NAME)
 
+$(NAME): $(OBJS)
+	make -C ./minilibx-linux
+	gcc -o $(NAME) $(OBJS) $(CFLAGS) -lmlx -L./minilibx-linux -lm
+
+clean:
+	rm -rf $(OBJS)
+
+fclean:
+	clean
+	rm -rf $(NAME)
+
+re:
+	fclean all
+
+.PHONY: clean fclaen all re 
 

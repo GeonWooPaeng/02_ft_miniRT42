@@ -75,6 +75,8 @@ mlx_key_hook(void *win_ptr, int(*funct_ptr)(), void *param);
 <br/>
 
 mlx_hook(void *win_ptr, int(*funct_ptr)(), void *param);
+- funct_ptr: 해당 이벤트가 발생할 때, 실행할 함수의 주소를 받는 파라미터
+- param: funct_ptr로 호출한 함수에 필요한 파라미터 데이터를 보내주는 파라미터
 
 <br/>
 
