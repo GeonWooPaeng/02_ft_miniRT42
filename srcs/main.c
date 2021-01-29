@@ -6,14 +6,14 @@
 /*   By: gpaeng <gpaeng@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/25 13:36:51 by gpaeng            #+#    #+#             */
-/*   Updated: 2021/01/29 14:38:17 by gpaeng           ###   ########.fr       */
+/*   Updated: 2021/01/29 16:34:48 by gpaeng           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <mlx.h>
 #include <stdlib.h>
 #include <stdio.h>
-#include "../includes/vector.h"
+#include "vector.h"
 
 #define ESC		65307
 #define KeyPress	2

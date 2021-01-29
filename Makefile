@@ -7,7 +7,9 @@ DIR_S = ./srcs/
 DIR_O = ./
 
 SRC =	\
-		vec_op.c \
+		vec_op.c	\
+		ray.c		\
+		camera.c	\
 		main.c
 
 
@@ -16,19 +18,18 @@ SRCS = $(addprefix $(DIR_S),$(SRC))
 OBJS = $(SRCS:.c=.o)
 
 %.o: %.c
-	$(CC) $(FLAGS) -c $< -o $@
+	$(CC) $(FLAGS) -c $< -I $(DIR_H) -o $@
 
 all: $(NAME)
 
 $(NAME): $(OBJS)
 	make -C ./minilibx-linux
-	gcc -o $(NAME) $(OBJS) $(CFLAGS) -lmlx -L./minilibx-linux -lm
+	gcc -o $(NAME) -I $(DIR_H) $(OBJS) $(CFLAGS) -lmlx -L./minilibx-linux -lbsd -lXext -lX11 -lm
 
 clean:
 	rm -rf $(OBJS)
 
-fclean:
-	clean
+fclean: clean
 	rm -rf $(NAME)
 
 re:

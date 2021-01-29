@@ -6,11 +6,11 @@
 /*   By: gpaeng <gpaeng@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/27 14:46:33 by gpaeng            #+#    #+#             */
-/*   Updated: 2021/01/29 15:38:56 by gpaeng           ###   ########.fr       */
+/*   Updated: 2021/01/29 16:31:31 by gpaeng           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/vector.h"
+#include "vector.h"
 
 t_vec3 *ft_vec_add(t_vec3 *tar, t_vec3 *u, t_vec3 *v)
 {

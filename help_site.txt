@@ -1,5 +1,5 @@
 - 블로그 -
-*** https://velog.io/@naranghae/miniRT-%EC%A7%84%ED%96%89-1-mlx-%ED%8A%9C%ED%86%A0%EB%A6%AC%EC%96%BC-1
+https://velog.io/@naranghae/miniRT-%EC%A7%84%ED%96%89-1-mlx-%ED%8A%9C%ED%86%A0%EB%A6%AC%EC%96%BC-1
 
 *** https://harm-smits.github.io/42docs/libs/minilibx/getting_started.html
 
