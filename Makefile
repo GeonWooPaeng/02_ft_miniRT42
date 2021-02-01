@@ -7,9 +7,13 @@ DIR_S = ./srcs/
 DIR_O = ./
 
 SRC =	\
-		vec_op.c	\
-		ray.c		\
-		camera.c	\
+		vec_op.c			\
+		ray.c				\
+		camera.c			\
+		hittable_list.c		\
+		hittable.c			\
+		sphere.c			\
+		utils.c				\
 		main.c
 
 

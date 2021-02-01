@@ -6,7 +6,7 @@
 /*   By: gpaeng <gpaeng@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/29 16:24:04 by gpaeng            #+#    #+#             */
-/*   Updated: 2021/01/30 17:14:53 by gpaeng           ###   ########.fr       */
+/*   Updated: 2021/02/01 14:33:08 by gpaeng           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ typedef struct	s_camera
 {
 	double		view_height;
 	double		view_width;
-	double		focal_length; //초점길이
+	double		focal_length; //초점길이, 클수록 크게 보인다.
 	t_point3	origin;
 	t_vec3		horizontal; //수평선
 	t_vec3		vertical; //수직선

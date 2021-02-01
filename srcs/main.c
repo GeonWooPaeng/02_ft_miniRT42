@@ -6,7 +6,7 @@
 /*   By: gpaeng <gpaeng@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/25 13:36:51 by gpaeng            #+#    #+#             */
-/*   Updated: 2021/01/31 22:53:12 by gpaeng           ###   ########.fr       */
+/*   Updated: 2021/02/01 16:48:21 by gpaeng           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -335,40 +335,200 @@
 // }
 
 // ----------------------------------------------------------------------
+// 표면 법선으로 음영 처리
+//- 구의 경우 바깥 쪽 법선은 히트 포인트엥서 중심을 뺀 방향
+//## 음영처리
+// - 법선을 시각화 하는데 사용되는 일반적인 트릭은 단위 길이 벡터
+// (각 구성 요소는 -1 과 1 사이에 있다.)
+// - 각 구성 요소를 0에서 1까지의 간격에 매핑한 다음 x / y / z를 r / g / b에 매핑합니다.
+// - 노멀의 경우 히트 여부, 히트 포인트 필요
+// - 장면에 구가 하나만 있고 카메라 바로 앞에 있으므로 음수는 생각 X
 
+// #include "vector.h"
+// #include "ray.h"
+// #include "camera.h"
+// #include <mlx.h>
+// #include <stdio.h>
+// #include <stdlib.h>
+
+// #define ESC		65307
+// #define KeyPress	2
+// #define KeyRelease	3
+
+// typedef struct s_data
+// {
+// 	void *mlx;
+// 	void *mlx_win;
+// 	double aspect_ratio;
+// 	int width, height;
+// 	void *img;
+// 	char *addr;
+// 	int bits_per_pixel;
+// 	int line_length;
+// 	int endian;
+// }				t_data;
+
+// void my_mlx_pixel_put(t_data *data, int x, int y, t_vec3 *color)
+// {
+// 	char *dst;
+
+// 	dst = data->addr + (y * data->line_length + x * (data->bits_per_pixel / 8));
+// 	*(unsigned int*)dst = create_trgb(0, 255.999 * color->x, 255.999 * color->y, 255.999 * color->z);
+// }
+
+// int ft_key_press(int keycode, t_data *data)
+// {
+// 	if (keycode == ESC)
+// 	{
+// 		mlx_destroy_window(data->mlx, data->mlx_win);
+// 		exit(0);
+// 	}
+// 	return (0);
+// }
+
+// double ft_hit_sphere(t_point3 *center, double radius, t_ray *r)
+// {
+// 	t_vec3 oc;
+// 	double a;
+// 	double b;
+// 	double c;
+// 	double discriminant; //판별
+
+// 	ft_vec_sub(&oc, &(r->origin), center);
+// 	a = ft_vec_dot(&(r->dir), &(r->dir));
+// 	b = 2.0 * ft_vec_dot(&oc, &(r->dir));
+// 	c = ft_vec_dot(&oc, &oc) - radius * radius;
+// 	discriminant = b * b - 4 * a * c;
+// 	if (discriminant < 0)
+// 		return (-1.0);
+// 	else
+// 		return ((-b - sqrt(discriminant)) / (2.0 * a));
+// }
+
+// t_color *ft_ray_color(t_color *target, t_ray *r)
+// {
+// 	t_vec3 unit_dir;
+// 	double t;//hit point
+// 	t_color cal1;
+// 	t_color cal2;
+// 	t_point3 sp_center; //중심
+// 	t_vec3 normal_vec;
+// 	t_vec3 ray_at;
+
+// 	t = ft_hit_sphere(ft_vec_set_xyz(&sp_center, 0, 0, -1), 0.5, r);
+// 	if (t > 0.0)
+// 	{
+// 		ft_ray_at(&ray_at, r, t);
+// 		ft_vec_set_xyz(&normal_vec, 0, 0, -1);
+// 		ft_vec_sub(&normal_vec, &ray_at, &normal_vec);
+// 		ft_vec_unit(&normal_vec, &normal_vec);
+// 		target->x = 0.5 * (normal_vec.x + 1);
+// 		target->y = 0.5 * (normal_vec.y + 1);
+// 		target->z = 0.5 * (normal_vec.z + 1);
+// 		return (target);
+// 	}
+// 	ft_vec_unit(&unit_dir, &(r->dir));
+// 	t = 0.5 * (unit_dir.y + 1.0);
+// 	ft_vec_multi_double(&cal1, (1.0 - t), ft_vec_set_xyz(&cal1, 1.0, 1.0, 1.0));
+// 	ft_vec_multi_double(&cal2, t, ft_vec_set_xyz(&cal2, 0.5, 0.7, 1.0));
+// 	return (ft_vec_add(target, &cal1, &cal2));
+// }
+
+// int ft_draw(t_data *data, t_camera *cam)
+// {
+// 	int i;
+// 	int j;
+// 	t_vec3 color;
+// 	t_ray r;
+
+// 	j = data->height - 1;
+// 	while (j >= 0)
+// 	{
+// 		i = 0;
+// 		printf("\rScanlines remaining: ");
+// 		printf("%d",j);
+// 		printf(" ");
+// 		while (i < data->width)
+// 		{
+// 			ft_camera_cal_ray(&r, cam, (double)i / (data->width - 1), (double)j / (data->height - 1));
+// 			ft_ray_color(&color, &r);
+// 			my_mlx_pixel_put(data, i, data->height - 1 - j, &color);
+// 			i++;
+// 		}
+// 		j--;
+// 	}
+// 	mlx_put_image_to_window(data->mlx, data->mlx_win, data->img, 0, 0);
+// 	return (0);
+// }
+
+// int main(void)
+// {
+// 	t_data data;
+// 	t_camera cam;
+
+// 	data.aspect_ratio = 16.0 / 9.0;
+// 	data.width = 600;
+// 	data.height = (int)(data.width / data.aspect_ratio);
+// 	ft_camera_set(&cam, data.aspect_ratio);
+// 	data.mlx = mlx_init();
+// 	data.mlx_win = mlx_new_window(data.mlx, data.width, data.height, "miniRT");
+// 	data.img = mlx_new_image(data.mlx, data.width, data.height);
+// 	data.addr = mlx_get_data_addr(data.img, &data.bits_per_pixel, &data.line_length, &data.endian);
+
+// 	mlx_hook(data.mlx_win, 2, 1L<<0, ft_key_press, &data);
+// 	ft_draw(&data, &cam);
+// 	mlx_loop(data.mlx);
+// 	return (0);
+// }
+
+// ------------------------------------------------------------------------
+
+// 밑 장판 + 원 
+
+#include <mlx.h>
+#include "utils.h"
 #include "vector.h"
 #include "ray.h"
+#include "hittable_list.h"
+#include "sphere.h"
 #include "camera.h"
-#include <mlx.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <math.h>
+#include <float.h>
 
 #define ESC		65307
 #define KeyPress	2
 #define KeyRelease	3
+#define PI	3.1415926535897932385
 
 typedef struct s_data
 {
-	void *mlx;
-	void *mlx_win;
-	double aspect_ratio;
-	int width, height;
-	void *img;
-	char *addr;
-	int bits_per_pixel;
-	int line_length;
-	int endian;
-}				t_data;
+	void	*mlx;
+	void	*mlx_win;
+	double	aspect_ratio;
+	int		width, height;
+	void	*img;
+	char	*addr;
+	int		bits_per_pixel;
+	int		line_length;
+	int		endian;
+}			t_data;
 
-void my_mlx_pixel_put(t_data *data, int x, int y, t_vec3 *color)
+double	degress_to_radians(double degrees)
+{
+	return (degrees * PI / 180.0);
+}
+
+void	my_mlx_pixel_put(t_data *data, int x, int y, t_vec3 *color)
 {
 	char *dst;
 
 	dst = data->addr + (y * data->line_length + x * (data->bits_per_pixel / 8));
-	*(unsigned int*)dst = create_trgb(0, 255.999 * color->x, 255.999 * color->y, 255.999 * color->z);
+	*(unsigned int *)dst = create_trgb(0, 255.999 * color->x, 255.999 * color->y, 255.999 * color->z);
 }
 
-int ft_key_press(int keycode, t_data *data)
+int	ft_key_press(int keycode, t_data *data)
 {
 	if (keycode == ESC)
 	{
@@ -378,46 +538,22 @@ int ft_key_press(int keycode, t_data *data)
 	return (0);
 }
 
-double ft_hit_shpere(t_point3 *center, double radius, t_ray *r)
+t_color *ft_ray_color(t_color *target, t_ray *r, t_obj **obj_lst)
 {
-	t_vec3 oc;
-	double a;
-	double b;
-	double c;
-	double discriminant; //판별
+	t_vec3		unit_dir;
+	double		t;
+	t_color		cal1;
+	t_color		cal2;
+	t_hit_rec	rec;
+	t_t			t_minmax;
 
-	ft_vec_sub(&oc, &(r->origin), center);
-	a = ft_vec_dot(&(r->dir), &(r->dir));
-	b = 2.0 * ft_vec3_dot(&oc, &(r->dir));
-	c = ft_vec_dot(&oc, &oc) - radius * radius;
-	discriminant = b * b - 4 * a * c;
-	if (discriminant < 0)
-		return (-1.0);
-	else
-		return ((-b - sqrt(discriminant)) / (2.0 * a));
-}
-
-t_color *ft_ray_color(t_color *target, t_ray *r)
-{
-	t_vec3 unit_dir;
-	double t;
-	t_color cal1;
-	t_color cal2;
-	t_point3 sp_center;
-	t_vec3 normal_vec;
-	t_vec3 ray_at;
-
-	t = ft_hit_sphere(ft_vec_set_xyz(&sp_center, 0, 0, -1), 0.5, r);
-	if (t > 0.0)
+	t_minmax.min = 0;
+	t_minmax.max = FLT_MAX;
+	if (ft_hit_lst_hit(obj_lst, r, t_minmax, &rec))
 	{
-		ft_ray_at(&ray_at, r, t);
-		ft_vec_set_xyz(&normal_vec, 0, 0, -1);
-		ft_vec_sub(&normal_vec, &ray_at, &normal_vec);
-		ft_vec_unit(&normal_vec, &normal_vec);
-		target->x = 0.5 * (normal_vec.x + 1);
-		target->y = 0.5 * (normal_vec.y + 1);
-		target->z = 0.5 * (normal_vec.z + 1);
-		return (target);
+		ft_vec_set_xyz(target, 1, 1, 1);
+		ft_vec_add(target, target, &rec.normal);
+		return (ft_vec_multi_double(target, 0.5, target));
 	}
 	ft_vec_unit(&unit_dir, &(r->dir));
 	t = 0.5 * (unit_dir.y + 1.0);
@@ -426,12 +562,12 @@ t_color *ft_ray_color(t_color *target, t_ray *r)
 	return (ft_vec_add(target, &cal1, &cal2));
 }
 
-int ft_draw(t_data *data, t_camera *cam)
+int	ft_draw(t_data *data, t_camera *cam, t_obj *world)
 {
-	int i;
-	int j;
-	t_vec3 color;
-	t_ray r;
+	int		i;
+	int		j;
+	t_vec3	color;
+	t_ray	r;
 
 	j = data->height - 1;
 	while (j >= 0)
@@ -443,7 +579,7 @@ int ft_draw(t_data *data, t_camera *cam)
 		while (i < data->width)
 		{
 			ft_camera_cal_ray(&r, cam, (double)i / (data->width - 1), (double)j / (data->height - 1));
-			ft_ray_color(&color, &r);
+			ft_ray_color(&color, &r, &world);
 			my_mlx_pixel_put(data, i, data->height - 1 - j, &color);
 			i++;
 		}
@@ -455,20 +591,34 @@ int ft_draw(t_data *data, t_camera *cam)
 
 int main(void)
 {
-	t_data data;
-	t_camera cam;
+	t_data		data;
+	t_camera	cam;
+	t_obj		*world;
+	t_point3	center;
+	t_sphere	*sp;
 
 	data.aspect_ratio = 16.0 / 9.0;
-	data.width;
+	data.width = 600;
 	data.height = (int)(data.width / data.aspect_ratio);
 	ft_camera_set(&cam, data.aspect_ratio);
+	
+	world = NULL;
+	sp = (t_sphere *)malloc(sizeof(t_sphere));
+	ft_vec_set_xyz(&center, 0, 0, -1);
+	ft_sphere_set(sp, &center, 0.5);
+	ft_hit_lst_add(&world, ft_hit_lst_newnode(sp));
+	sp = (t_sphere *)malloc(sizeof(t_sphere));
+	ft_vec_set_xyz(&center, 0, -100.5, -1);
+	ft_sphere_set(sp, &center, 100);
+	ft_hit_lst_add(&world, ft_hit_lst_newnode(sp));
+
 	data.mlx = mlx_init();
 	data.mlx_win = mlx_new_window(data.mlx, data.width, data.height, "miniRT");
 	data.img = mlx_new_image(data.mlx, data.width, data.height);
 	data.addr = mlx_get_data_addr(data.img, &data.bits_per_pixel, &data.line_length, &data.endian);
 
 	mlx_hook(data.mlx_win, 2, 1L<<0, ft_key_press, &data);
-	ft_draw(&data, &cam);
+	ft_draw(&data, &cam, world);
 	mlx_loop(data.mlx);
 	return (0);
 }
