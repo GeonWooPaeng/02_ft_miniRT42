@@ -6,7 +6,7 @@
 /*   By: gpaeng <gpaeng@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/25 13:36:51 by gpaeng            #+#    #+#             */
-/*   Updated: 2021/02/01 16:48:21 by gpaeng           ###   ########.fr       */
+/*   Updated: 2021/02/01 20:35:25 by gpaeng           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -484,14 +484,23 @@
 // ------------------------------------------------------------------------
 
 // 밑 장판 + 원 
+// 광선이 외부에서 구와 교차하는 경우
+// : 법선(normal point)은 광선(ray)의 반대를 가리킨다.
+// : 법선이 outward를 가리키지만 만약 광선이 구 안에 있을 경우 법선은 inward를 가리킨다.
 
+// 광선이 내부에서 구와 교차하는 경우
+// : 법선(which always points out)은 광선과 같은 방향을 가리킨다.
+
+// ray와 normal face(법사면)이 같은 방향이면 ray는 물체 내부에 있고 
+// ray와 normal face이 반대 방향이면 ray는 물체 외부에 있습니다.
+// => 두 벡터의 내적으로 결정됩니다.(양수: ray는 구 내부)
 #include <mlx.h>
 #include "utils.h"
 #include "vector.h"
 #include "ray.h"
 #include "hittable_list.h"
 #include "sphere.h"
-#include "camera.h"
+#include "ft_camera.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
@@ -597,16 +606,19 @@ int main(void)
 	t_point3	center;
 	t_sphere	*sp;
 
+	//표현할 화면, 카메라 setting
 	data.aspect_ratio = 16.0 / 9.0;
 	data.width = 600;
 	data.height = (int)(data.width / data.aspect_ratio);
 	ft_camera_set(&cam, data.aspect_ratio);
 	
 	world = NULL;
+	//원 만들기
 	sp = (t_sphere *)malloc(sizeof(t_sphere));
-	ft_vec_set_xyz(&center, 0, 0, -1);
-	ft_sphere_set(sp, &center, 0.5);
+	ft_vec_set_xyz(&center, 0, 0, -1);//(0,0,-1)에 구체 위치
+	ft_sphere_set(sp, &center, 0.5);//중심이랑 반지름 setting
 	ft_hit_lst_add(&world, ft_hit_lst_newnode(sp));
+	//바닥 만들기
 	sp = (t_sphere *)malloc(sizeof(t_sphere));
 	ft_vec_set_xyz(&center, 0, -100.5, -1);
 	ft_sphere_set(sp, &center, 100);

@@ -9,7 +9,7 @@ DIR_O = ./
 SRC =	\
 		vec_op.c			\
 		ray.c				\
-		camera.c			\
+		ft_camera.c			\
 		hittable_list.c		\
 		hittable.c			\
 		sphere.c			\
