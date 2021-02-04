@@ -14,6 +14,7 @@ SRC =	\
 		hittable.c			\
 		sphere.c			\
 		utils.c				\
+		ft_random.c			\
 		main.c
 
 
