@@ -79,3 +79,6 @@ coefficient
 
 discriminant
 : 판별(b^2 - 4ac)
+
+앱실론(컴퓨터 그래픽)
+: 광선을 쏘고 그 object에 부딪치고 난 뒤 shading ray에서 shadow acne가 생길 때 자그마한 값(앱실론)을 넣어 방지

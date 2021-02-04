@@ -6,7 +6,7 @@
 /*   By: gpaeng <gpaeng@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/25 13:36:51 by gpaeng            #+#    #+#             */
-/*   Updated: 2021/02/04 15:07:35 by gpaeng           ###   ########.fr       */
+/*   Updated: 2021/02/04 15:45:23 by gpaeng           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -730,7 +730,7 @@ int ft_draw(t_data *data, t_camera *cam, t_obj *world)
 	int j;
 	int k;
 	t_vec3 color;
-	t_vec3	tmp_color;
+	t_vec3 tmp_color;
 	t_ray r;
 	j = data->height - 1;
 	while (j >= 0)

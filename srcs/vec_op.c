@@ -6,7 +6,7 @@
 /*   By: gpaeng <gpaeng@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/27 14:46:33 by gpaeng            #+#    #+#             */
-/*   Updated: 2021/01/30 22:06:48 by gpaeng           ###   ########.fr       */
+/*   Updated: 2021/02/04 16:25:07 by gpaeng           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,4 +100,14 @@ t_vec3 *ft_vec_set_xyz(t_vec3 *tar, double x, double y, double z)
 int create_trgb(int t, int r, int g, int b)
 {
 	return (t << 24 | r << 16 | g << 8 | b);
+}
+
+t_vec3 *ft_vec_reflect(t_vec3 *refl, t_vec3 *v, t_vec3 *n)
+{
+	t_vec3 *tmp;
+	tmp = (t_vec3 *)malloc(sizeof(t_vec3));
+	ft_vec_multi_double(tmp, 2 * ft_vec_dot(v, n), n);
+	ft_vec_sub(refl, v, tmp);
+	free(tmp);
+	return (refl);
 }

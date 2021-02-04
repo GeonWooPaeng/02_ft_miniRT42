@@ -6,7 +6,7 @@
 /*   By: gpaeng <gpaeng@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/27 14:41:01 by gpaeng            #+#    #+#             */
-/*   Updated: 2021/01/30 22:06:43 by gpaeng           ###   ########.fr       */
+/*   Updated: 2021/02/04 16:21:52 by gpaeng           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ double ft_vec_dot(t_vec3 *u, t_vec3 *v);
 double ft_vec_len_sqrt(t_vec3 *tar);
 double ft_vec_len(t_vec3 *tar);
 int create_trgb(int t, int r, int g, int b);
+t_vec3 *ft_vec_reflect(t_vec3 *refl, t_vec3 *v, t_vec3 *u);
 
 typedef t_vec3 t_point3;
 typedef t_vec3 t_color;

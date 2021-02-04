@@ -1,14 +1,14 @@
 - 블로그 -
-https://velog.io/@naranghae/miniRT-%EC%A7%84%ED%96%89-1-mlx-%ED%8A%9C%ED%86%A0%EB%A6%AC%EC%96%BC-1
+*** https://velog.io/@naranghae/miniRT-%EC%A7%84%ED%96%895-%EC%A7%84%ED%96%89%ED%95%98%EA%B8%B0-%EC%95%9E%EC%84%9C-%EC%95%8C%EC%95%84%EC%95%BC-%ED%95%98%EB%8A%94-%EB%82%B4%EC%9A%A9-%EC%A0%95%EB%A6%AC
 
-*** https://harm-smits.github.io/42docs/libs/minilibx/getting_started.html
+https://harm-smits.github.io/42docs/libs/minilibx/getting_started.html
 
-*** https://github.com/psj3205/miniRT#4-%EA%B4%91%EC%84%A0-%EA%B5%AC%EC%A1%B0%EC%B2%B4-%EB%A7%8C%EB%93%A4%EA%B8%B0
+https://github.com/psj3205/miniRT#4-%EA%B4%91%EC%84%A0-%EA%B5%AC%EC%A1%B0%EC%B2%B4-%EB%A7%8C%EB%93%A4%EA%B8%B0
 
 - 전반적인 공부 - 
-*** https://raytracing.github.io/books/RayTracingInOneWeekend.html#thevec3class
+https://raytracing.github.io/books/RayTracingInOneWeekend.html#thevec3class
 
-*** https://www.youtube.com/watch?v=uPRcxCwhqD4
+https://www.youtube.com/watch?v=uPRcxCwhqD4
 
 안티앨리어싱, 분산광 할때 랜덤함수때 다른거 참고
 
