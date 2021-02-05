@@ -6,7 +6,7 @@
 /*   By: gpaeng <gpaeng@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/25 13:36:51 by gpaeng            #+#    #+#             */
-/*   Updated: 2021/02/04 15:45:23 by gpaeng           ###   ########.fr       */
+/*   Updated: 2021/02/05 15:33:28 by gpaeng           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,18 +30,18 @@
 // 	void *img;
 // 	char *addr; //mlx_get_data_addr()로 생성한 이미지의 시작 주소
 // 	int bits_per_pixel; //픽셀 당 비트의 수
-// 	int line_length; //이미지의 가로 한줄의 바이트 수
+// 	int word_length; //이미지의 가로 한줄의 바이트 수
 // 	int endian;
 // }				t_data;
 
 // void my_mlx_pixel_put(t_data *data, int x, int y, t_vec3 *color)
 // {
 // 	char *dst;
-// 	// y * data->line_length : y좌표만큼의 메모리 주소로 이동
+// 	// y * data->word_length : y좌표만큼의 메모리 주소로 이동
 // 	// data->bits_per_pixel / 8 : 픽셀당 바이트 수를 구하기 위해 /8 해줍니다.
 // 	// x * (data->bits_per_pixel / 8) : x 좌표만큼의 메모리 주소를 이동
 // 	// => (x,y)좌표의 픽셀의 메모리 주소 구할 수 있다.
-// 	dst = data->addr + (y * data->line_length + x * (data->bits_per_pixel / 8));
+// 	dst = data->addr + (y * data->word_length + x * (data->bits_per_pixel / 8));
 // 	*(unsigned int *)dst = create_trgb(0, 255.999 * color->x, 255.999 * color->y, 255.999 * color->z);
 // }
 
@@ -66,7 +66,7 @@
 // 	while (j >= 0)
 // 	{
 // 		i = 0;
-// 		printf("\rScanlines remaining: ");
+// 		printf("\rScanwords remaining: ");
 // 		printf("%d", j);
 // 		printf(" ");
 // 		while (i < data->width)
@@ -91,7 +91,7 @@
 // 	data.height = 400;
 // 	data.mlx_win = mlx_new_window(data.mlx, data.width, data.height, "miniRT");
 // 	data.img = mlx_new_image(data.mlx, 600, 400);
-// 	data.addr = mlx_get_data_addr(data.img, &data.bits_per_pixel, &data.line_length, &data.endian);
+// 	data.addr = mlx_get_data_addr(data.img, &data.bits_per_pixel, &data.word_length, &data.endian);
 
 // 	mlx_hook(data.mlx_win, 2, 1L<<0, ft_key_press, &data);
 // 	ft_draw(&data);
@@ -126,7 +126,7 @@
 // 	void *img;
 // 	char *addr;
 // 	int bits_per_pixel;
-// 	int line_length;
+// 	int word_length;
 // 	int endian;
 // }				t_data;
 
@@ -134,7 +134,7 @@
 // {
 // 	char *dst;
 
-// 	dst = data->addr + (y * data->line_length + x * (data->bits_per_pixel / 8));
+// 	dst = data->addr + (y * data->word_length + x * (data->bits_per_pixel / 8));
 // 	*(unsigned int *)dst = create_trgb(0, 255.999 * color->x, 255.999 * color->y, 255.999 * color->z);
 // }
 
@@ -173,7 +173,7 @@
 // 	while (j >= 0)
 // 	{
 // 		i = 0;
-// 		printf("\rScanlines remaining: ");
+// 		printf("\rScanwords remaining: ");
 // 		printf("%d", j);
 // 		printf(" ");
 // 		while (i < data->width)
@@ -202,7 +202,7 @@
 // 	data.mlx = mlx_init();
 // 	data.mlx_win = mlx_new_window(data.mlx, data.width, data.height, "miniRT");
 // 	data.img = mlx_new_image(data.mlx, 600, 400);
-// 	data.addr = mlx_get_data_addr(data.img, &data.bits_per_pixel, &data.line_length, &data.endian);
+// 	data.addr = mlx_get_data_addr(data.img, &data.bits_per_pixel, &data.word_length, &data.endian);
 // 	mlx_hook(data.mlx_win, 2, 1L<<0, ft_key_press, &data);
 // 	ft_draw(&data, &cam);
 // 	mlx_loop(data.mlx);
@@ -232,7 +232,7 @@
 // 	void *img;
 // 	char *addr;
 // 	int bits_per_pixel;
-// 	int line_length;
+// 	int word_length;
 // 	int endian;
 // }				t_data;
 
@@ -240,7 +240,7 @@
 // {
 // 	char *dst;
 
-// 	dst = data->addr + (y * data->line_length + x * (data->bits_per_pixel / 8));
+// 	dst = data->addr + (y * data->word_length + x * (data->bits_per_pixel / 8));
 // 	*(unsigned int *)dst = create_trgb(0, 255.999 * color->x, 255.999 * color->y, 255.999 * color->z);
 // }
 
@@ -299,7 +299,7 @@
 // 	while (j >= 0)
 // 	{
 // 		i = 0;
-// 		printf("\rScanlines remaining");
+// 		printf("\rScanwords remaining");
 // 		printf("%d", j);
 // 		printf(" ");
 // 		while (i < data->width)
@@ -327,7 +327,7 @@
 // 	data.mlx = mlx_init();
 // 	data.mlx_win = mlx_new_window(data.mlx, data.width, data.height, "miniRT");
 // 	data.img = mlx_new_image(data.mlx, data.width, data.height);
-// 	data.addr = mlx_get_data_addr(data.img, &data.bits_per_pixel, &data.line_length, &data.endian);
+// 	data.addr = mlx_get_data_addr(data.img, &data.bits_per_pixel, &data.word_length, &data.endian);
 // 	mlx_hook(data.mlx_win, 2, 1L<<0, ft_key_press, &data);
 // 	ft_draw(&data, &cam);
 // 	mlx_loop(data.mlx);
@@ -364,7 +364,7 @@
 // 	void *img;
 // 	char *addr;
 // 	int bits_per_pixel;
-// 	int line_length;
+// 	int word_length;
 // 	int endian;
 // }				t_data;
 
@@ -372,7 +372,7 @@
 // {
 // 	char *dst;
 
-// 	dst = data->addr + (y * data->line_length + x * (data->bits_per_pixel / 8));
+// 	dst = data->addr + (y * data->word_length + x * (data->bits_per_pixel / 8));
 // 	*(unsigned int*)dst = create_trgb(0, 255.999 * color->x, 255.999 * color->y, 255.999 * color->z);
 // }
 
@@ -445,7 +445,7 @@
 // 	while (j >= 0)
 // 	{
 // 		i = 0;
-// 		printf("\rScanlines remaining: ");
+// 		printf("\rScanwords remaining: ");
 // 		printf("%d",j);
 // 		printf(" ");
 // 		while (i < data->width)
@@ -473,7 +473,7 @@
 // 	data.mlx = mlx_init();
 // 	data.mlx_win = mlx_new_window(data.mlx, data.width, data.height, "miniRT");
 // 	data.img = mlx_new_image(data.mlx, data.width, data.height);
-// 	data.addr = mlx_get_data_addr(data.img, &data.bits_per_pixel, &data.line_length, &data.endian);
+// 	data.addr = mlx_get_data_addr(data.img, &data.bits_per_pixel, &data.word_length, &data.endian);
 
 // 	mlx_hook(data.mlx_win, 2, 1L<<0, ft_key_press, &data);
 // 	ft_draw(&data, &cam);
@@ -520,7 +520,7 @@
 // 	void	*img;
 // 	char	*addr;
 // 	int		bits_per_pixel;
-// 	int		line_length;
+// 	int		word_length;
 // 	int		endian;
 // }			t_data;
 
@@ -533,7 +533,7 @@
 // {
 // 	char *dst;
 
-// 	dst = data->addr + (y * data->line_length + x * (data->bits_per_pixel / 8));
+// 	dst = data->addr + (y * data->word_length + x * (data->bits_per_pixel / 8));
 // 	*(unsigned int *)dst = create_trgb(0, 255.999 * color->x, 255.999 * color->y, 255.999 * color->z);
 // }
 
@@ -582,7 +582,7 @@
 // 	while (j >= 0)
 // 	{
 // 		i = 0;
-// 		printf("\rScanlines remaining: ");
+// 		printf("\rScanwords remaining: ");
 // 		printf("%d",j);
 // 		printf(" ");
 // 		while (i < data->width)
@@ -627,7 +627,7 @@
 // 	data.mlx = mlx_init();
 // 	data.mlx_win = mlx_new_window(data.mlx, data.width, data.height, "miniRT");
 // 	data.img = mlx_new_image(data.mlx, data.width, data.height);
-// 	data.addr = mlx_get_data_addr(data.img, &data.bits_per_pixel, &data.line_length, &data.endian);
+// 	data.addr = mlx_get_data_addr(data.img, &data.bits_per_pixel, &data.word_length, &data.endian);
 
 // 	mlx_hook(data.mlx_win, 2, 1L<<0, ft_key_press, &data);
 // 	ft_draw(&data, &cam, world);
@@ -636,6 +636,164 @@
 // }
 
 // ---------------------------------------------------------------------------------------------
+
+// #include <mlx.h>
+// #include "utils.h"
+// #include "vector.h"
+// #include "ray.h"
+// #include "hittable_list.h"
+// #include "sphere.h"
+// #include "ft_random.h"
+// #include "ft_camera.h"
+// #include <stdio.h>
+// #include <stdlib.h>
+// #include <math.h>
+// #include <float.h>
+
+// #define ESC		65307
+// #define KeyPress	2
+// #define KeyRelease	3
+// #define PI	3.1415926535897932385
+
+// typedef struct s_data
+// {
+// 	void *mlx;
+// 	void *mlx_win;
+// 	double aspect_ratio;
+// 	int width, height;
+// 	int samples_per_pixel;
+// 	void *img;
+// 	char *addr;
+// 	int bits_per_pixel;
+// 	int word_length;
+// 	int endian;
+// }t_data;
+
+// double degrees_to_radians(double degrees)
+// {
+// 	return (degrees * PI / 180.0);
+// }
+
+// void my_mlx_pixel_put(t_data *data, int x, int y, t_vec3 *color, int samples_per_pixel)
+// {
+// 	char *dst;
+// 	double r;
+// 	double b;
+// 	double g;
+// 	double scale;
+
+// 	scale = 1.0 / samples_per_pixel;
+// 	r = color->x * scale;
+// 	g = color->y * scale;
+// 	b = color->z * scale;
+// 	dst = data->addr + (y * data->word_length + x * (data->bits_per_pixel / 8));
+// 	*(unsigned int *)dst = create_trgb(0, 256 * ft_clamp(r, 0.0, 0.999), 256 * ft_clamp(g, 0.0, 0.999), 256 * ft_clamp(b, 0.0, 0.999));
+// }
+
+// int ft_key_press(int keycode, t_data *data)
+// {
+// 	if (keycode == ESC)
+// 	{
+// 		mlx_destroy_window(data->mlx, data->mlx_win);
+// 		exit(0);
+// 	}
+// 	return (0);
+// }
+
+// t_color *ft_ray_color(t_color *target, t_ray *r, t_obj **obj_lst)
+// {
+// 	t_vec3 unit_dir;
+// 	double t;
+// 	t_color cal1;
+// 	t_color cal2;
+// 	t_hit_rec rec;
+// 	t_t t_minmax;
+
+// 	t_minmax.min = 0;
+// 	t_minmax.max = FLT_MAX;
+// 	if (ft_hit_lst_hit(obj_lst, r, t_minmax, &rec))
+// 	{
+// 		ft_vec_set_xyz(target, 1, 1, 1);
+// 		ft_vec_add(target, target, &rec.normal);
+// 		return (ft_vec_multi_double(target, 0.5, target));
+// 	}
+// 	ft_vec_unit(&unit_dir, &(r->dir));
+// 	t = 0.5 * (unit_dir.y + 1.0);
+// 	ft_vec_multi_double(&cal1, (1.0 - t), ft_vec_set_xyz(&cal1, 1.0, 1.0, 1.0));
+// 	ft_vec_multi_double(&cal2, t, ft_vec_set_xyz(&cal2, 0.5, 0.7, 1.0));
+// 	return (ft_vec_add(target, &cal1, &cal2));
+// }
+
+// int ft_draw(t_data *data, t_camera *cam, t_obj *world)
+// {
+// 	int i;
+// 	int j;
+// 	int k;
+// 	t_vec3 color;
+// 	t_vec3 tmp_color;
+// 	t_ray r;
+// 	j = data->height - 1;
+// 	while (j >= 0)
+// 	{
+// 		i = 0;
+// 		printf("\rScanwords remaining ");
+// 		printf("%d",j);
+// 		printf(" ");
+// 		while (i < data->width)
+// 		{
+// 			k = 0;
+// 			ft_vec_set_xyz(&color, 0, 0, 0);
+// 			while (k < data->samples_per_pixel)
+// 			{
+// 				ft_camera_get_ray(&r, cam, ((double)i + ft_random_double()) / (data->width - 1), ((double)j + ft_random_double()) / (data->height - 1));
+// 				ft_ray_color(&tmp_color, &r, &world);
+// 				ft_vec_add(&color, &color, &tmp_color);
+// 				k++;
+// 			}
+// 			my_mlx_pixel_put(data, i, data->height - 1 - j, &color, data->samples_per_pixel);
+// 			i++;
+// 		}
+// 		j--;
+// 	}
+// 	mlx_put_image_to_window(data->mlx, data->mlx_win, data->img, 0, 0);
+// 	return (0);
+// }
+
+// int main(void)
+// {
+// 	t_data data;
+// 	t_camera cam;
+// 	t_obj *world;
+// 	t_point3 center;
+// 	t_sphere *sp;
+
+// 	data.aspect_ratio = 16.0 / 9.0;
+// 	data.width = 600;
+// 	data.height = (int)(data.width / data.aspect_ratio);
+// 	data.samples_per_pixel = 100;
+
+// 	world = NULL;
+// 	sp = (t_sphere *)malloc(sizeof(t_sphere));
+// 	ft_vec_set_xyz(&center, 0, 0, -1);
+// 	ft_sphere_set(sp, &center, 0.5);
+// 	ft_hit_lst_add(&world, ft_hit_lst_newnode(sp));
+// 	sp = (t_sphere *)malloc(sizeof(t_sphere));
+// 	ft_vec_set_xyz(&center, 0, -100.5, -1);
+// 	ft_sphere_set(sp, &center, 100);
+// 	ft_hit_lst_add(&world, ft_hit_lst_newnode(sp));
+// 	ft_camera_set(&cam);
+// 	data.mlx = mlx_init();
+// 	data.mlx_win = mlx_new_window(data.mlx, data.width, data.height, "miniRT");
+// 	data.img = mlx_new_image(data.mlx, data.width, data.height);
+// 	data.addr = mlx_get_data_addr(data.img, &data.bits_per_pixel, &data.word_length, &data.endian);
+
+// 	mlx_hook(data.mlx_win, 2, 1L<<0, ft_key_press, &data);
+// 	ft_draw(&data, &cam, world);
+// 	mlx_loop(data.mlx);
+// 	return (0);
+// }
+
+// --------------------------------------------------------------------
 
 #include <mlx.h>
 #include "utils.h"
@@ -650,145 +808,61 @@
 #include <math.h>
 #include <float.h>
 
-#define ESC		65307
-#define KeyPress	2
-#define KeyRelease	3
-#define PI	3.1415926535897932385
-
-typedef struct s_data
+void ft_parse_resolution()
 {
-	void *mlx;
-	void *mlx_win;
-	double aspect_ratio;
-	int width, height;
-	int samples_per_pixel;
-	void *img;
-	char *addr;
-	int bits_per_pixel;
-	int line_length;
-	int endian;
-}t_data;
-
-double degrees_to_radians(double degrees)
-{
-	return (degrees * PI / 180.0);
 }
 
-void my_mlx_pixel_put(t_data *data, int x, int y, t_vec3 *color, int samples_per_pixel)
+void ft_make_word(char **line)
 {
-	char *dst;
-	double r;
-	double b;
-	double g;
-	double scale;
-
-	scale = 1.0 / samples_per_pixel;
-	r = color->x * scale;
-	g = color->y * scale;
-	b = color->z * scale;
-	dst = data->addr + (y * data->line_length + x * (data->bits_per_pixel / 8));
-	*(unsigned int *)dst = create_trgb(0, 256 * ft_clamp(r, 0.0, 0.999), 256 * ft_clamp(g, 0.0, 0.999), 256 * ft_clamp(b, 0.0, 0.999));
 }
 
-int ft_key_press(int keycode, t_data *data)
+void ft_parse_value(char **words)
 {
-	if (keycode == ESC)
+	if (ft_strncmp(*words, "R", 2) == 0)
+		ft_parse_resolution();
+	// else if (ft_strncmp(*words, "A", 2) == 0)
+	// 	ft_parse_amb_light();
+	// else if (ft_strncmp(*words, "c", 2) == 0)
+	// 	ft_parse_camera();
+	// else if (ft_strncmp(*words, "l", 2) == 0)
+	// 	ft_parse_light();
+	// else if (ft_strncmp(*words, "sp", 3) == 0)
+	// 	ft_parse_sphere();
+	// else if (ft_strncmp(*words, "pl", 3) == 0)
+	// 	ft_parse_plane();
+	// else if (ft_strncmp(*words, "sq", 3) == 0)
+	// 	ft_parse_square();
+	// else if (ft_strncmp(*words, "cy", 3) == 0)
+	// 	ft_parse_cylinder();
+	// else if (ft_strncmp(*words, "tr", 3) == 0)
+	// 	ft_parse_triangle();
+	else
+		printf("[Error] No match .rt files");
+}
+
+int main(int argc, char *argv[])
+{
+	if (argc == 2)
 	{
-		mlx_destroy_window(data->mlx, data->mlx_win);
-		exit(0);
-	}
-	return (0);
-}
-
-t_color *ft_ray_color(t_color *target, t_ray *r, t_obj **obj_lst)
-{
-	t_vec3 unit_dir;
-	double t;
-	t_color cal1;
-	t_color cal2;
-	t_hit_rec rec;
-	t_t t_minmax;
-
-	t_minmax.min = 0;
-	t_minmax.max = FLT_MAX;
-	if (ft_hit_lst_hit(obj_lst, r, t_minmax, &rec))
-	{
-		ft_vec_set_xyz(target, 1, 1, 1);
-		ft_vec_add(target, target, &rec.normal);
-		return (ft_vec_multi_double(target, 0.5, target));
-	}
-	ft_vec_unit(&unit_dir, &(r->dir));
-	t = 0.5 * (unit_dir.y + 1.0);
-	ft_vec_multi_double(&cal1, (1.0 - t), ft_vec_set_xyz(&cal1, 1.0, 1.0, 1.0));
-	ft_vec_multi_double(&cal2, t, ft_vec_set_xyz(&cal2, 0.5, 0.7, 1.0));
-	return (ft_vec_add(target, &cal1, &cal2));
-}
-
-int ft_draw(t_data *data, t_camera *cam, t_obj *world)
-{
-	int i;
-	int j;
-	int k;
-	t_vec3 color;
-	t_vec3 tmp_color;
-	t_ray r;
-	j = data->height - 1;
-	while (j >= 0)
-	{
-		i = 0;
-		printf("\rScanlines remaining ");
-		printf("%d",j);
-		printf(" ");
-		while (i < data->width)
+		int		fd;
+		int		ret;
+		char	*line;
+		char	**words;
+		
+		if ((fd = open(argv[1], O_RDONLY)) == -1)
 		{
-			k = 0;
-			ft_vec_set_xyz(&color, 0, 0, 0);
-			while (k < data->samples_per_pixel)
-			{
-				ft_camera_get_ray(&r, cam, ((double)i + ft_random_double()) / (data->width - 1), ((double)j + ft_random_double()) / (data->height - 1));
-				ft_ray_color(&tmp_color, &r, &world);
-				ft_vec_add(&color, &color, &tmp_color);
-				k++;
-			}
-			my_mlx_pixel_put(data, i, data->height - 1 - j, &color, data->samples_per_pixel);
-			i++;
+			printf("Error");
+			return (0);
 		}
-		j--;
+		while ((ret = get_next_word(fd, &line)) > 0)
+		{
+			words = ft_make_word(&line);
+			ft_parse_value(words);
+			printf("line >> %s\n", line);
+			free(line);
+		}
+		printf("line >> %s\n", line);
+		free(line);
 	}
-	mlx_put_image_to_window(data->mlx, data->mlx_win, data->img, 0, 0);
-	return (0);
-}
-
-int main(void)
-{
-	t_data data;
-	t_camera cam;
-	t_obj *world;
-	t_point3 center;
-	t_sphere *sp;
-
-	data.aspect_ratio = 16.0 / 9.0;
-	data.width = 600;
-	data.height = (int)(data.width / data.aspect_ratio);
-	data.samples_per_pixel = 100;
-
-	world = NULL;
-	sp = (t_sphere *)malloc(sizeof(t_sphere));
-	ft_vec_set_xyz(&center, 0, 0, -1);
-	ft_sphere_set(sp, &center, 0.5);
-	ft_hit_lst_add(&world, ft_hit_lst_newnode(sp));
-	sp = (t_sphere *)malloc(sizeof(t_sphere));
-	ft_vec_set_xyz(&center, 0, -100.5, -1);
-	ft_sphere_set(sp, &center, 100);
-	ft_hit_lst_add(&world, ft_hit_lst_newnode(sp));
-	ft_camera_set(&cam);
-	data.mlx = mlx_init();
-	data.mlx_win = mlx_new_window(data.mlx, data.width, data.height, "miniRT");
-	data.img = mlx_new_image(data.mlx, data.width, data.height);
-	data.addr = mlx_get_data_addr(data.img, &data.bits_per_pixel, &data.line_length, &data.endian);
-
-	mlx_hook(data.mlx_win, 2, 1L<<0, ft_key_press, &data);
-	ft_draw(&data, &cam, world);
-	mlx_loop(data.mlx);
 	return (0);
 }

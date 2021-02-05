@@ -6,7 +6,7 @@
 /*   By: gpaeng <gpaeng@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/27 14:41:01 by gpaeng            #+#    #+#             */
-/*   Updated: 2021/02/04 16:21:52 by gpaeng           ###   ########.fr       */
+/*   Updated: 2021/02/05 13:11:38 by gpaeng           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define VECTOR_H
 
 #include <math.h>
+#include <stdlib.h>
 
 typedef struct	s_vec3
 {

@@ -6,7 +6,7 @@
 /*   By: gpaeng <gpaeng@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/01 14:46:00 by gpaeng            #+#    #+#             */
-/*   Updated: 2021/02/04 20:36:23 by gpaeng           ###   ########.fr       */
+/*   Updated: 2021/02/05 13:42:38 by gpaeng           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ char	*ft_strndup(const char *str, size_t num);
 char	*ft_strjoin(const char *a, const char *b);
 char	*ft_strchr(const char *str, int c);
 int		get_next_line(int fd, char **line);
+int		ft_strncmp(const char *s1, const char *s2, size_t n);
 
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 32

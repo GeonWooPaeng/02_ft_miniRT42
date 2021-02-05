@@ -6,7 +6,7 @@
 /*   By: gpaeng <gpaeng@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/04 20:37:08 by gpaeng            #+#    #+#             */
-/*   Updated: 2021/02/04 20:51:20 by gpaeng           ###   ########.fr       */
+/*   Updated: 2021/02/05 13:42:15 by gpaeng           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ size_t	ft_strlen(const char *str)
 char	*ft_strndup(const char *str, size_t num)
 {
 	char	*arr;
-	int		idx;
+	size_t	idx;
 
 	if (!(arr = (char *)malloc(sizeof(char) * (num + 1))))
 		return (0);
@@ -78,4 +78,20 @@ char	*ft_strchr(const char *str, int c)
 		str++;
 	}
 	return (0);
+}
+
+int		ft_strncmp(const char *s1, const char *s2, size_t n)
+{
+	size_t i;
+
+	i = 0;
+	while (*s1 && *s2 && *s1 == *s2 && i < n)
+	{
+		s1++;
+		s2++;
+		i++;
+	}
+	if (i == n)
+		return (0);
+	return (*(unsigned char *)s1 - *(unsigned char *)s2);
 }
