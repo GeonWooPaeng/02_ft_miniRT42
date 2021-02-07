@@ -6,7 +6,7 @@
 /*   By: gpaeng <gpaeng@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/25 13:36:51 by gpaeng            #+#    #+#             */
-/*   Updated: 2021/02/05 15:33:28 by gpaeng           ###   ########.fr       */
+/*   Updated: 2021/02/07 15:40:06 by gpaeng           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -808,33 +808,71 @@
 #include <math.h>
 #include <float.h>
 
-void ft_parse_resolution()
+void ft_parse_resolution(char **line)
 {
+	int xrender;
+	int yrender;
+	
+	xrender = 0;
+	yrender = 0;
+	*line += 1;
+	while (**line == ' ' || **line == '\t')
+		*line += 1;
+	while(**line >= '0' && **line <= '9')
+	{
+		xrender = xrender * 10 + (**line - '0');
+		*line += 1; 
+	}
+	while (**line == ' ' || **line == '\t')
+		*line += 1;
+	while (**line >= '0' && **line <= '9')
+	{
+		yrender = yrender * 10 + (**line - '0');
+		*line += 1;
+	}
 }
 
-void ft_make_word(char **line)
+void ft_parse_amb_light(char **line)
 {
+	double ill_ratio; //조도 비율
+	int color[2];
+
+	*line += 1;
+	ill_ratio = 1.0;
+	color[0] = 1;
+	while (**line == ' ' || **line == '\t')
+		*line += 1;
+	if (**line == '0')
+	{
+		*line += 2;
+		ill_ratio = (**line - '0') * 0.1;
+	}
+	*line += 1;
+	while (**line == ' ' || **line == '\t')
+		*line += 1;
+	while (**line >= '0' && **line <= '9')
+
 }
 
-void ft_parse_value(char **words)
+void ft_parse_value(char **line)
 {
-	if (ft_strncmp(*words, "R", 2) == 0)
-		ft_parse_resolution();
-	// else if (ft_strncmp(*words, "A", 2) == 0)
-	// 	ft_parse_amb_light();
-	// else if (ft_strncmp(*words, "c", 2) == 0)
+	if (ft_strncmp(*line, "R ", 2) == 0)
+		ft_parse_resolution(line);
+	else if (ft_strncmp(*line, "A ", 2) == 0)
+		ft_parse_amb_light();
+	// else if (ft_strncmp(*line, "c ", 2) == 0)
 	// 	ft_parse_camera();
-	// else if (ft_strncmp(*words, "l", 2) == 0)
+	// else if (ft_strncmp(*line, "l ", 2) == 0)
 	// 	ft_parse_light();
-	// else if (ft_strncmp(*words, "sp", 3) == 0)
+	// else if (ft_strncmp(*line, "sp ", 3) == 0)
 	// 	ft_parse_sphere();
-	// else if (ft_strncmp(*words, "pl", 3) == 0)
+	// else if (ft_strncmp(*line, "pl ", 3) == 0)
 	// 	ft_parse_plane();
-	// else if (ft_strncmp(*words, "sq", 3) == 0)
+	// else if (ft_strncmp(*line, "sq ", 3) == 0)
 	// 	ft_parse_square();
-	// else if (ft_strncmp(*words, "cy", 3) == 0)
+	// else if (ft_strncmp(*line, "cy ", 3) == 0)
 	// 	ft_parse_cylinder();
-	// else if (ft_strncmp(*words, "tr", 3) == 0)
+	// else if (ft_strncmp(*line, "tr ", 3) == 0)
 	// 	ft_parse_triangle();
 	else
 		printf("[Error] No match .rt files");
@@ -847,17 +885,15 @@ int main(int argc, char *argv[])
 		int		fd;
 		int		ret;
 		char	*line;
-		char	**words;
 		
 		if ((fd = open(argv[1], O_RDONLY)) == -1)
 		{
 			printf("Error");
 			return (0);
 		}
-		while ((ret = get_next_word(fd, &line)) > 0)
+		while ((ret = get_next_line(fd, &line)) > 0)
 		{
-			words = ft_make_word(&line);
-			ft_parse_value(words);
+			ft_parse_value(&line);
 			printf("line >> %s\n", line);
 			free(line);
 		}
