@@ -6,11 +6,27 @@
 /*   By: gpaeng <gpaeng@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/05 16:09:15 by gpaeng            #+#    #+#             */
-/*   Updated: 2021/02/08 16:53:34 by gpaeng           ###   ########.fr       */
+/*   Updated: 2021/02/08 19:28:19 by gpaeng           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "utils.h"
+
+int ft_isspace(char *line)
+{	
+	// while (line[idx] == ' ' || line[idx] == '\t')
+	// idx++;
+	// 줄이기 위해 만든 것
+	int idx;
+
+	idx = 0;
+	while (*line == ' ' || *line == '\t')
+	{
+		idx++;
+		line++;
+	}
+	return (idx);
+}
 
 
 int	ft_atoi(char *str, int *n)

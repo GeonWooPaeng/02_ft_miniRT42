@@ -18,6 +18,9 @@ SRC =	\
 		utils3.c			\
 		ft_random.c			\
 		get_next_line.c		\
+		parse/parse_obj1.c	\
+		parse/parse_obj2.c	\
+		parse/parsing.c		\
 		main.c
 
 
