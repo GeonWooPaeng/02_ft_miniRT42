@@ -6,69 +6,52 @@
 /*   By: gpaeng <gpaeng@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/05 16:09:15 by gpaeng            #+#    #+#             */
-/*   Updated: 2021/02/07 17:01:28 by gpaeng           ###   ########.fr       */
+/*   Updated: 2021/02/08 16:53:34 by gpaeng           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-// #include "utils.h"
-#include <stdio.h>
+#include "utils.h"
+
 
 int	ft_atoi(char *str, int *n)
 {
 	int sign;
+	int idx;
 	long num;
 
 	num = 0;
-	num = 0;
-	if (*str == '-')
-		str++;
-	while (*str >= '0' && *str <= '9')
+	sign = 1;
+	idx = 0;
+	if (str[idx] == '-')
 	{
-		num = num * 10 + (*str - '0');
-		str++;
+		sign = -1;
+		idx++;
 	}
-	return (sign * (int)num);
+	while (str[idx] >= '0' && str[idx] <= '9')
+	{
+		num = num * 10 + (str[idx] - '0');
+		idx++;
+	}
+	*n = sign * num;
+	return (idx);
 }
 
-double ft_atod(char *str)
+int ft_atod(char *str, double *n)
 {
-	int num;
-	double result;
 	double point; //자리수
+	int num;
+	int idx;
 
-	num = ft_atoi(str);
-	printf(">>>> %d\n", num);
-	if (*str == '.')
-		str++;
-	printf("s >>> %s\n",str);
-	point = num < 0 ? -0.1 : 0.1;
-	while (*str >= '0' && *str <= '9')
+	idx = ft_atoi(str, &num);
+	point = (num < 0 || (num == 0 && idx == 2)) ? -0.1 : 0.1;
+	if (str[idx] == '.')
+		idx++;
+	*n = num;
+	while (str[idx] >= '0' && str[idx] <= '9')
 	{
-		str++;
-		result += point * (*str - '0');
+		*n += point * (str[idx] - '0');
 		point *= 0.1;
+		idx++;
 	}
-	return (result);
-}
-
-int main()
-{
-	char *a = "-9.42";
-	char *b = "-0.3";
-	char *c = "0.2";
-	char *d = "1.0";
-	// char *a = "-93";
-	// char *b = "-0";
-	// char *c = "0";
-	// char *d = "1";
-
-	// printf("%d\n",ft_atoi(a));
-	// printf("%d\n",ft_atoi(b));
-	// printf("%d\n",ft_atoi(c));
-	// printf("%d\n",ft_atoi(d));
-	printf("%lf\n",ft_atod(a));
-	printf("%lf\n",ft_atod(b));
-	printf("%lf\n",ft_atod(c));
-	printf("%lf\n",ft_atod(d));
-
+	return (idx);
 }

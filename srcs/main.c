@@ -6,7 +6,7 @@
 /*   By: gpaeng <gpaeng@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/25 13:36:51 by gpaeng            #+#    #+#             */
-/*   Updated: 2021/02/07 15:40:06 by gpaeng           ###   ########.fr       */
+/*   Updated: 2021/02/08 17:28:03 by gpaeng           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -808,74 +808,327 @@
 #include <math.h>
 #include <float.h>
 
-void ft_parse_resolution(char **line)
+// int ft_isspace(char *line)
+// {	
+// 	// while (line[idx] == ' ' || line[idx] == '\t')
+// 	// idx++;
+// 	// 줄이기 위해 만든 것
+// 	int idx;
+
+// 	idx = 0;
+// 	while (*line == ' ' || *line == '\t')
+// 	{
+// 		idx++;
+// 		line++;
+// 	}
+// 	return (idx);
+// }
+
+void ft_parse_resolution(char *line)
 {
 	int xrender;
 	int yrender;
-	
+	int idx;
+
 	xrender = 0;
 	yrender = 0;
-	*line += 1;
-	while (**line == ' ' || **line == '\t')
-		*line += 1;
-	while(**line >= '0' && **line <= '9')
-	{
-		xrender = xrender * 10 + (**line - '0');
-		*line += 1; 
-	}
-	while (**line == ' ' || **line == '\t')
-		*line += 1;
-	while (**line >= '0' && **line <= '9')
-	{
-		yrender = yrender * 10 + (**line - '0');
-		*line += 1;
-	}
+	idx = 1;
+	while (line[idx] == ' ' || line[idx] == '\t')
+		idx++;
+	idx += ft_atoi(&line[idx], &xrender);
+	while (line[idx] == ' ' || line[idx] == '\t')
+		idx += 1;
+	idx += ft_atoi(&line[idx], &yrender);
+	// printf("xrender >> %d\n", xrender);
+	// printf("yrender >> %d\n", yrender);
+
 }
 
-void ft_parse_amb_light(char **line)
+void ft_parse_amb_light(char *line)
 {
 	double ill_ratio; //조도 비율
-	int color[2];
+	int color[3];
+	int idx;
 
-	*line += 1;
-	ill_ratio = 1.0;
-	color[0] = 1;
-	while (**line == ' ' || **line == '\t')
-		*line += 1;
-	if (**line == '0')
-	{
-		*line += 2;
-		ill_ratio = (**line - '0') * 0.1;
-	}
-	*line += 1;
-	while (**line == ' ' || **line == '\t')
-		*line += 1;
-	while (**line >= '0' && **line <= '9')
-
+	idx = 1;
+	while (line[idx] == ' ' || line[idx] == '\t')
+		idx += 1;
+	idx += ft_atod(&line[idx], &ill_ratio);
+	while (line[idx] == ' ' || line[idx] == '\t')
+		idx += 1;
+	idx += (ft_atoi(&line[idx], &color[0]) + 1); //R
+	idx += (ft_atoi(&line[idx], &color[1]) + 1); //G
+	idx += ft_atoi(&line[idx], &color[2]); //B
+	// printf("color >> %d\n", color[0]);
+	// printf("color >> %d\n", color[1]);
+	// printf("color >> %d\n", color[2]);
+	// printf("ill >> %lf\n", ill_ratio);
 }
 
-void ft_parse_value(char **line)
+void ft_parse_camera(char *line)
 {
-	if (ft_strncmp(*line, "R ", 2) == 0)
+	double	loc[3];
+	t_vec3	vec;
+	int		fov;
+	int		idx;
+	
+	idx = 1;
+	while (line[idx] == ' ' || line[idx] == '\t')
+		idx++;
+	idx += (ft_atod(&line[idx], &loc[0]) + 1);
+	idx += (ft_atod(&line[idx], &loc[1]) + 1);
+	idx += (ft_atod(&line[idx], &loc[2]) + 1);
+	while (line[idx] == ' ' || line[idx] == '\t')
+		idx++;
+	idx += (ft_atod(&line[idx], &(vec.x)) + 1);
+	idx += (ft_atod(&line[idx], &(vec.y)) + 1);
+	idx += (ft_atod(&line[idx], &(vec.z)) + 1);
+	while (line[idx] == ' ' || line[idx] == '\t')
+		idx++;
+	idx += ft_atoi(&line[idx], &fov);
+	// printf("camera >>> %lf\n", loc[0]);
+	// printf("camera >>> %lf\n", loc[1]);
+	// printf("camera >>> %lf\n", loc[2]);
+	// printf("camera >>> %lf\n", vec.x);
+	// printf("camera >>> %lf\n", vec.y);
+	// printf("camera >>> %lf\n", vec.z);
+	// printf("camera >>> %d\n", fov);
+}
+
+void ft_parse_light(char *line)
+{
+	int		idx;
+	int		color[3];
+	t_vec3	vec;
+	double	light_ratio;
+
+	idx = 1;
+	while (line[idx] == ' ' || line[idx] == '\t')
+		idx++;
+	idx += (ft_atod(&line[idx], &(vec.x)) + 1);
+	idx += (ft_atod(&line[idx], &(vec.y)) + 1);
+	idx += (ft_atod(&line[idx], &(vec.z)) + 1);
+	while (line[idx] == ' ' || line[idx] == '\t')
+		idx++;
+	idx += (ft_atod(&line[idx], &light_ratio) + 1);
+	while (line[idx] == ' ' || line[idx] == '\t')
+		idx++;
+	idx += (ft_atoi(&line[idx], &color[0]) + 1);
+	idx += (ft_atoi(&line[idx], &color[1]) + 1);
+	idx += ft_atoi(&line[idx], &color[2]);
+	
+	// printf("light >>> %lf\n", vec.x);
+	// printf("light >>> %lf\n", vec.y);
+	// printf("light >>> %lf\n", vec.z);
+	// printf("light >>> %d\n", color[0]);
+	// printf("light >>> %d\n", color[1]);
+	// printf("light >>> %d\n", color[2]);
+	// printf("light >>> %lf\n", light_ratio);
+}
+void ft_parse_plane(char *line)
+{
+	t_vec3	vec;
+	t_vec3	dir_vec;
+	int		color[3];
+	int		idx;
+
+	idx = 2;
+	while (line[idx] == ' ' || line[idx] == '\t')
+		idx++;
+	idx += (ft_atod(&line[idx], &(vec.x)) + 1);
+	idx += (ft_atod(&line[idx], &(vec.y)) + 1);
+	idx += (ft_atod(&line[idx], &(vec.z)) + 1);
+	while (line[idx] == ' ' || line[idx] == '\t')
+		idx++;
+	idx += (ft_atod(&line[idx], &(dir_vec.x)) + 1);
+	idx += (ft_atod(&line[idx], &(dir_vec.y)) + 1);
+	idx += (ft_atod(&line[idx], &(dir_vec.z)) + 1);
+	while (line[idx] == ' ' || line[idx] == '\t')
+		idx++;
+	idx += (ft_atoi(&line[idx], &color[0]) + 1);
+	idx += (ft_atoi(&line[idx], &color[1]) + 1);
+	idx += ft_atoi(&line[idx], &color[2]);
+
+	// printf("plane >>> %lf\n", vec.x);
+	// printf("plane >>> %lf\n", vec.y);
+	// printf("plane >>> %lf\n", vec.z);
+	// printf("plane >>> %lf\n", dir_vec.x);
+	// printf("plane >>> %lf\n", dir_vec.y);
+	// printf("plane >>> %lf\n", dir_vec.z);
+	// printf("plane >>> %d\n", color[0]);
+	// printf("plane >>> %d\n", color[1]);
+	// printf("plane >>> %d\n", color[2]);
+}
+
+void ft_parse_sphere(char *line)
+{
+	t_vec3	center;
+	double	dia;
+	int		color[3];
+	int		idx;
+
+	idx = 2;
+	while (line[idx] == ' ' || line[idx] == '\t')
+		idx++;
+	idx += (ft_atod(&line[idx], &(center.x)) + 1);
+	idx += (ft_atod(&line[idx], &(center.y)) + 1);
+	idx += (ft_atod(&line[idx], &(center.z)) + 1);
+	while (line[idx] == ' ' || line[idx] == '\t')
+		idx++;
+	idx += ft_atod(&line[idx], &dia);
+	while (line[idx] == ' ' || line[idx] == '\t')
+		idx++;
+	idx += (ft_atoi(&line[idx], &color[0]) + 1);
+	idx += (ft_atoi(&line[idx], &color[1]) + 1);
+	idx += ft_atoi(&line[idx], &color[2]);
+
+	// printf("sphere >>> %lf\n", center.x);
+	// printf("sphere >>> %lf\n", center.y);
+	// printf("sphere >>> %lf\n", center.z);
+	// printf("sphere >>> %lf\n", dia);
+	// printf("sphere >>> %d\n", color[0]);
+	// printf("sphere >>> %d\n", color[1]);
+	// printf("sphere >>> %d\n", color[2]);
+}
+
+void ft_parse_square(char *line)
+{
+	t_vec3	center;
+	t_vec3	dir_vec;
+	double	side;
+	int		color[3];
+	int		idx;
+
+	idx = 2;
+	while (line[idx] == ' ' || line[idx] == '\t')
+		idx++;
+	idx += (ft_atod(&line[idx], &(center.x)) + 1);
+	idx += (ft_atod(&line[idx], &(center.y)) + 1);
+	idx += (ft_atod(&line[idx], &(center.z)) + 1);
+	while (line[idx] == ' ' || line[idx] == '\t')
+		idx++;
+	idx += (ft_atod(&line[idx], &(dir_vec.x)) + 1);
+	idx += (ft_atod(&line[idx], &(dir_vec.y)) + 1);
+	idx += (ft_atod(&line[idx], &(dir_vec.z)) + 1);
+	while (line[idx] == ' ' || line[idx] == '\t')
+		idx++;
+	idx += (ft_atod(&line[idx], &side));
+	while (line[idx] == ' ' || line[idx] == '\t')
+		idx++;
+	idx += (ft_atoi(&line[idx], &color[0]) + 1);
+	idx += (ft_atoi(&line[idx], &color[1]) + 1);
+	idx += ft_atoi(&line[idx], &color[2]);
+
+	// printf("square >>> %lf\n", center.x);
+	// printf("square >>> %lf\n", center.y);
+	// printf("square >>> %lf\n", center.z);
+	// printf("square >>> %lf\n", dir_vec.x);
+	// printf("square >>> %lf\n", dir_vec.y);
+	// printf("square >>> %lf\n", dir_vec.z);
+	// printf("square >>> %lf\n", side);
+	// printf("square >>> %d\n", color[0]);
+	// printf("square >>> %d\n", color[1]);
+	// printf("square >>> %d\n", color[2]);
+}
+
+void ft_parse_cylinder(char *line)
+{
+	t_vec3	vec;
+	t_vec3	dir_vec;
+	double	dia;
+	double	height;
+	int		color[3];
+	int		idx;
+
+	idx = 2;
+	while (line[idx] == ' ' || line[idx] == '\t')
+		idx++;
+	idx += (ft_atod(&line[idx], &(vec.x)) + 1);
+	idx += (ft_atod(&line[idx], &(vec.y)) + 1);
+	idx += (ft_atod(&line[idx], &(vec.z)) + 1);
+	while (line[idx] == ' ' || line[idx] == '\t')
+		idx++;
+	idx += (ft_atod(&line[idx], &(dir_vec.x)) + 1);
+	idx += (ft_atod(&line[idx], &(dir_vec.y)) + 1);
+	idx += (ft_atod(&line[idx], &(dir_vec.z)) + 1);
+	while (line[idx] == ' ' || line[idx] == '\t')
+		idx++;
+	idx += (ft_atod(&line[idx], &dia));
+	while (line[idx] == ' ' || line[idx] == '\t')
+		idx++;
+	idx += (ft_atod(&line[idx], &height));
+	while (line[idx] == ' ' || line[idx] == '\t')
+		idx++;
+	idx += (ft_atoi(&line[idx], &color[0]) + 1);
+	idx += (ft_atoi(&line[idx], &color[1]) + 1);
+	idx += ft_atoi(&line[idx], &color[2]);
+
+	// printf("cylinder >>> %lf\n", vec.x);
+	// printf("cylinder >>> %lf\n", vec.y);
+	// printf("cylinder >>> %lf\n", vec.z);
+	// printf("cylinder >>> %lf\n", dir_vec.x);
+	// printf("cylinder >>> %lf\n", dir_vec.y);
+	// printf("cylinder >>> %lf\n", dir_vec.z);
+	// printf("cylinder >>> %d\n", color[0]);
+	// printf("cylinder >>> %d\n", color[1]);
+	// printf("cylinder >>> %d\n", color[2]);
+	// printf("cylinder >>> %lf\n", dia);
+	// printf("cylinder >>> %lf\n", height);
+}
+
+void ft_parse_triangle(char *line)
+{
+	t_vec3	vec1;
+	t_vec3	vec2;
+	t_vec3	vec3;
+	int		color[3];
+	int		idx;
+
+	idx = 2;
+	while (line[idx] == ' ' || line[idx] == '\t')
+		idx++;
+	idx += (ft_atod(&line[idx], &(vec1.x)) + 1);
+	idx += (ft_atod(&line[idx], &(vec1.y)) + 1);
+	idx += (ft_atod(&line[idx], &(vec1.z)) + 1);
+	while (line[idx] == ' ' || line[idx] == '\t')
+		idx++;
+	idx += (ft_atod(&line[idx], &(vec2.x)) + 1);
+	idx += (ft_atod(&line[idx], &(vec2.y)) + 1);
+	idx += (ft_atod(&line[idx], &(vec2.z)) + 1);
+	while (line[idx] == ' ' || line[idx] == '\t')
+		idx++;
+	idx += (ft_atod(&line[idx], &(vec3.x)) + 1);
+	idx += (ft_atod(&line[idx], &(vec3.y)) + 1);
+	idx += (ft_atod(&line[idx], &(vec3.z)) + 1);
+	while (line[idx] == ' ' || line[idx] == '\t')
+		idx++;
+	idx += (ft_atoi(&line[idx], &color[0]) + 1);
+	idx += (ft_atoi(&line[idx], &color[1]) + 1);
+	idx += ft_atoi(&line[idx], &color[2]);
+}
+
+void ft_parse_value(char *line)
+{
+	if (line[0] == 'R')
 		ft_parse_resolution(line);
-	else if (ft_strncmp(*line, "A ", 2) == 0)
-		ft_parse_amb_light();
-	// else if (ft_strncmp(*line, "c ", 2) == 0)
-	// 	ft_parse_camera();
-	// else if (ft_strncmp(*line, "l ", 2) == 0)
-	// 	ft_parse_light();
-	// else if (ft_strncmp(*line, "sp ", 3) == 0)
-	// 	ft_parse_sphere();
-	// else if (ft_strncmp(*line, "pl ", 3) == 0)
-	// 	ft_parse_plane();
-	// else if (ft_strncmp(*line, "sq ", 3) == 0)
-	// 	ft_parse_square();
-	// else if (ft_strncmp(*line, "cy ", 3) == 0)
-	// 	ft_parse_cylinder();
-	// else if (ft_strncmp(*line, "tr ", 3) == 0)
-	// 	ft_parse_triangle();
+	else if (line[0] == 'A')
+		ft_parse_amb_light(line);
+	else if (line[0] == 'c' && line[1] == 'y')
+		ft_parse_cylinder(line);
+	else if (line[0] == 'c')
+		ft_parse_camera(line);
+	else if (line[0] == 'l')
+		ft_parse_light(line);
+	else if (line[0] == 'p' && line[1] == 'l')
+		ft_parse_plane(line);
+	else if (line[0] == 's' && line[1] == 'p')
+		ft_parse_sphere(line);
+	else if (line[0] == 's' && line[1] == 'q')
+		ft_parse_square(line);
+	else if (line[0] == 't' && line[1] == 'r')
+		ft_parse_triangle(line);
 	else
-		printf("[Error] No match .rt files");
+		printf("[Error] No match .rt files\n");
 }
 
 int main(int argc, char *argv[])
@@ -893,7 +1146,7 @@ int main(int argc, char *argv[])
 		}
 		while ((ret = get_next_line(fd, &line)) > 0)
 		{
-			ft_parse_value(&line);
+			ft_parse_value(line);
 			printf("line >> %s\n", line);
 			free(line);
 		}
