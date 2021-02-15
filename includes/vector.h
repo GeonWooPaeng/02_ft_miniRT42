@@ -6,7 +6,7 @@
 /*   By: gpaeng <gpaeng@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/27 14:41:01 by gpaeng            #+#    #+#             */
-/*   Updated: 2021/02/05 13:11:38 by gpaeng           ###   ########.fr       */
+/*   Updated: 2021/02/14 23:16:34 by gpaeng           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ t_vec3 *ft_vec_multi_double(t_vec3 *tar, double t, t_vec3 *v);
 t_vec3 *ft_vec_div_double(t_vec3 *tar, double t, t_vec3 *v);
 t_vec3 *ft_vec_cross(t_vec3 *tar, t_vec3 *u, t_vec3 *v);
 t_vec3 *ft_vec_unit(t_vec3 *tar, t_vec3 *v);
-t_vec3 *ft_vec_set_xyz(t_vec3 *tar, double x, double y, double z);
+t_vec3 *ft_vec_set_xyz(double x, double y, double z);
 double ft_vec_dot(t_vec3 *u, t_vec3 *v);
 double ft_vec_len_sqrt(t_vec3 *tar);
 double ft_vec_len(t_vec3 *tar);

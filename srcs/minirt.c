@@ -1,25 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   scene.h                                            :+:      :+:    :+:   */
+/*   minirt.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gpaeng <gpaeng@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/02/08 21:23:14 by gpaeng            #+#    #+#             */
-/*   Updated: 2021/02/15 13:52:14 by gpaeng           ###   ########.fr       */
+/*   Created: 2021/02/14 15:46:51 by gpaeng            #+#    #+#             */
+/*   Updated: 2021/02/15 13:52:08 by gpaeng           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "minirt.h"
 
-#ifndef	SCENE_H
-# define SCENE_H
 
-typedef struct		s_scene
+int main(int argc, char *argv[])
 {
-	void			*mlx;
-	int				width;
-	int				height;
-	double			aspect_ratio;
-}					t_scene;
-
-#endif
+}

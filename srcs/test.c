@@ -1,14 +1,15 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   test.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gpaeng <gpaeng@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/01/25 13:36:51 by gpaeng            #+#    #+#             */
-/*   Updated: 2021/02/08 21:32:45 by gpaeng           ###   ########.fr       */
+/*   Created: 2021/02/14 15:46:20 by gpaeng            #+#    #+#             */
+/*   Updated: 2021/02/14 15:46:21 by gpaeng           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 
 // #include <mlx.h>
 // #include <stdlib.h>
@@ -795,18 +796,18 @@
 
 // --------------------------------------------------------------------
 
-#include <mlx.h>
-#include "utils.h"
-#include "vector.h"
-#include "ray.h"
-#include "hittable_list.h"
-#include "sphere.h"
-#include "ft_random.h"
-#include "ft_camera.h"
-#include <stdio.h>
-#include <stdlib.h>
-#include <math.h>
-#include <float.h>
+// #include <mlx.h>
+// #include "utils.h"
+// #include "vector.h"
+// #include "ray.h"
+// #include "hittable_list.h"
+// #include "sphere.h"
+// #include "ft_random.h"
+// #include "ft_camera.h"
+// #include <stdio.h>
+// #include <stdlib.h>
+// #include <math.h>
+// #include <float.h>
 
 
 // void ft_parse_resolution(char *line)
@@ -1065,29 +1066,29 @@
 // 	idx += ft_atoi(&line[idx], &color[2]);
 // }
 
-void ft_parse_value(char *line)
-{
-	if (line[0] == 'R')
-		ft_parse_resolution(line);
-	else if (line[0] == 'A')
-		ft_parse_amb_light(line);
-	else if (line[0] == 'c' && line[1] == 'y')
-		ft_parse_cylinder(line);
-	else if (line[0] == 'c')
-		ft_parse_camera(line);
-	else if (line[0] == 'l')
-		ft_parse_light(line);
-	else if (line[0] == 'p' && line[1] == 'l')
-		ft_parse_plane(line);
-	else if (line[0] == 's' && line[1] == 'p')
-		ft_parse_sphere(line);
-	else if (line[0] == 's' && line[1] == 'q')
-		ft_parse_square(line);
-	else if (line[0] == 't' && line[1] == 'r')
-		ft_parse_triangle(line);
-	else
-		printf("[Error] No match .rt files\n");
-}
+// void ft_parse_value(char *line)
+// {
+// 	if (line[0] == 'R')
+// 		ft_parse_resolution(line);
+// 	else if (line[0] == 'A')
+// 		ft_parse_amb_light(line);
+// 	else if (line[0] == 'c' && line[1] == 'y')
+// 		ft_parse_cylinder(line);
+// 	else if (line[0] == 'c')
+// 		ft_parse_camera(line);
+// 	else if (line[0] == 'l')
+// 		ft_parse_light(line);
+// 	else if (line[0] == 'p' && line[1] == 'l')
+// 		ft_parse_plane(line);
+// 	else if (line[0] == 's' && line[1] == 'p')
+// 		ft_parse_sphere(line);
+// 	else if (line[0] == 's' && line[1] == 'q')
+// 		ft_parse_square(line);
+// 	else if (line[0] == 't' && line[1] == 'r')
+// 		ft_parse_triangle(line);
+// 	else
+// 		printf("[Error] No match .rt files\n");
+// }
 
 // int main(int argc, char *argv[])
 // {
@@ -1113,3 +1114,6 @@ void ft_parse_value(char *line)
 // 	}
 // 	return (0);
 // }
+
+
+// -------------------------------------------------------

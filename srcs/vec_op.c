@@ -6,7 +6,7 @@
 /*   By: gpaeng <gpaeng@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/27 14:46:33 by gpaeng            #+#    #+#             */
-/*   Updated: 2021/02/04 16:25:07 by gpaeng           ###   ########.fr       */
+/*   Updated: 2021/02/14 23:17:02 by gpaeng           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,12 +89,14 @@ t_vec3 *ft_vec_unit(t_vec3 *tar, t_vec3 *v)
 	return (ft_vec_div_double(tar, ft_vec_len(v), v));
 }
 
-t_vec3 *ft_vec_set_xyz(t_vec3 *tar, double x, double y, double z)
+t_vec3 *ft_vec_set_xyz(double x, double y, double z)
 {
-	tar->x = x;
-	tar->y = y;
-	tar->z = z;
-	return (tar);
+	t_vec3	*vec;
+
+	vec->x = x;
+	vec->y = y;
+	vec->z = z;
+	return (vec);
 }
 
 int create_trgb(int t, int r, int g, int b)
